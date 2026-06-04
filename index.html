@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Better Thing Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:#F2C4CE;--pink-lt:#FAE8EC;--yellow:#F5E6A3;--yel-lt:#FDF6D8;
+    --peach:#F5D0B5;--cream:#FDFAF4;--dark:#1E1A1C;--mid:#5C4F55;
+    --muted:#9C8D93;--accent:#C9506A;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(253,250,244,0.85);backdrop-filter:blur(14px);border-bottom:0.5px solid rgba(242,196,206,0.4)}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .bt-logo{width:38px;height:38px}
+  .bt-logo svg{width:100%;height:100%}
+  .nav-wordmark{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;letter-spacing:0.12em;color:var(--dark)}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-size:13px;color:var(--mid);text-decoration:none;letter-spacing:0.04em;transition:color .2s}
+  .nav-links a:hover{color:var(--dark)}
+  .nav-cta{font-size:12px;font-weight:500;letter-spacing:0.06em;color:var(--dark);background:var(--yellow);border:none;border-radius:40px;padding:9px 22px;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+  .nav-cta:hover{background:var(--pink);transform:scale(1.02)}
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+  .blob-1{width:520px;height:520px;background:var(--pink-lt);top:-100px;right:-80px;opacity:.85}
+  .blob-2{width:380px;height:380px;background:var(--yel-lt);bottom:-60px;left:30%;opacity:.9}
+  .blob-3{width:200px;height:200px;background:var(--peach);top:40%;left:-60px;opacity:.6}
+  .hero-left{position:relative;z-index:2}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px}
+  .hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--accent)}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,82px);font-weight:300;line-height:1.08;color:var(--dark);margin-bottom:28px}
+  .hero-title em{font-style:italic;color:var(--accent)}
+  .hero-desc{font-size:15px;font-weight:300;line-height:1.8;color:var(--mid);max-width:420px;margin-bottom:44px}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn-primary{font-size:13px;font-weight:500;letter-spacing:0.05em;color:var(--dark);background:var(--pink);border:none;border-radius:40px;padding:14px 32px;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s}
+  .btn-primary:hover{background:#ebb8c4;transform:translateY(-1px)}
+  .btn-secondary{font-size:13px;font-weight:400;letter-spacing:0.05em;color:var(--mid);background:transparent;border:0.5px solid rgba(92,79,85,.3);border-radius:40px;padding:14px 32px;cursor:pointer;text-decoration:none;transition:border-color .2s,color .2s}
+  .btn-secondary:hover{border-color:var(--mid);color:var(--dark)}
+  .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center}
+  .hero-monogram{position:relative;width:380px;height:380px}
+  .mono-ring{position:absolute;inset:0;border-radius:50%;border:0.5px solid rgba(242,196,206,.7);animation:spin-slow 20s linear infinite}
+  .mono-ring-2{position:absolute;inset:28px;border-radius:50%;border:0.5px dashed rgba(245,230,163,.6);animation:spin-slow 30s linear infinite reverse}
+  @keyframes spin-slow{to{transform:rotate(360deg)}}
+  .mono-inner{position:absolute;inset:50px;background:linear-gradient(135deg,var(--pink-lt) 0%,var(--yel-lt) 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(242,196,206,.4)}
+  .mono-text{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;letter-spacing:-0.05em;color:var(--dark);line-height:1;user-select:none}
+  .mono-dots{position:absolute;inset:0}
+  .mono-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink)}
+  .mono-dot:nth-child(1){top:12%;left:50%;transform:translateX(-50%)}
+  .mono-dot:nth-child(2){top:50%;right:8%;transform:translateY(-50%)}
+  .mono-dot:nth-child(3){bottom:12%;left:50%;transform:translateX(-50%);background:var(--yellow)}
+  .mono-dot:nth-child(4){top:50%;left:8%;transform:translateY(-50%);background:var(--yellow)}
+  .marquee-wrap{overflow:hidden;border-top:0.5px solid rgba(242,196,206,.5);border-bottom:0.5px solid rgba(242,196,206,.5);padding:14px 0;background:var(--pink-lt)}
+  .marquee-track{display:flex;width:max-content;animation:marquee 22s linear infinite}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  .marquee-item{display:flex;align-items:center;gap:18px;padding:0 28px;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+  .marquee-item::after{content:'✦';font-size:8px;color:var(--pink)}
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:120px 48px}
+  .about-img{aspect-ratio:4/5;background:linear-gradient(160deg,var(--pink-lt) 0%,var(--yel-lt) 100%);border-radius:24px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .about-img-inner{font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:300;color:rgba(201,80,106,.12);letter-spacing:-0.05em;user-select:none}
+  .about-img-tag{position:absolute;bottom:24px;left:24px;background:white;border-radius:40px;padding:8px 18px;font-size:11px;font-weight:500;letter-spacing:0.06em;color:var(--dark);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+  .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+  .section-label::before{content:'';display:inline-block;width:18px;height:1px;background:var(--accent)}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.15;color:var(--dark);margin-bottom:24px}
+  .section-title em{font-style:italic;color:var(--accent)}
+  .section-body{font-size:14px;font-weight:300;line-height:1.9;color:var(--mid);margin-bottom:40px}
+  .stat-row{display:flex;gap:40px}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--dark);line-height:1}
+  .stat-label{font-size:11px;font-weight:400;letter-spacing:0.06em;color:var(--muted);margin-top:4px}
+  .brands{padding:100px 48px;background:linear-gradient(180deg,var(--cream) 0%,var(--pink-lt) 100%)}
+  .brands-header{text-align:center;margin-bottom:64px}
+  .brands-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
+  .brand-card{background:white;border-radius:20px;padding:40px 32px;border:0.5px solid rgba(242,196,206,.5);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .brand-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--yellow));opacity:0;transition:opacity .25s}
+  .brand-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(242,196,206,.35)}
+  .brand-card:hover::before{opacity:1}
+  .brand-card-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400}
+  .icon-vela{background:#FDE8EC;color:var(--accent)}
+  .icon-bt{background:var(--yel-lt);color:#8B6914}
+  .icon-next{background:#EEF3FD;color:#3A6BC9}
+  .brand-card-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;letter-spacing:0.06em;color:var(--dark);margin-bottom:8px}
+  .brand-card-status{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:16px}
+  .status-launch{background:#FDE8EC;color:var(--accent)}
+  .status-dev{background:var(--yel-lt);color:#8B6914}
+  .status-tbd{background:#F0F0F0;color:#888}
+  .brand-card-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--mid)}
+  .values{padding:120px 48px;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+  .values-list{display:flex;flex-direction:column;gap:0}
+  .value-item{display:grid;grid-template-columns:40px 1fr;gap:20px;align-items:start;padding:32px 0;border-bottom:0.5px solid rgba(242,196,206,.4)}
+  .value-item:first-child{padding-top:0}
+  .value-item:last-child{border-bottom:none}
+  .value-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--pink);line-height:1;margin-top:2px}
+  .value-name{font-size:15px;font-weight:500;color:var(--dark);margin-bottom:6px}
+  .value-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--mid)}
+  .contact{background:var(--dark);padding:120px 48px;position:relative;overflow:hidden}
+  .contact-blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+  .contact-blob-1{width:400px;height:400px;background:rgba(242,196,206,.12);top:-100px;right:-80px}
+  .contact-blob-2{width:300px;height:300px;background:rgba(245,230,163,.08);bottom:-80px;left:20%}
+  .contact-inner{max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:2}
+  .contact-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--pink);margin-bottom:20px}
+  .contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,62px);font-weight:300;line-height:1.1;color:white;margin-bottom:20px}
+  .contact-title em{font-style:italic;color:var(--pink)}
+  .contact-sub{font-size:14px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.45);margin-bottom:48px}
+  .contact-email{display:inline-block;font-size:16px;font-weight:400;letter-spacing:0.04em;color:var(--yellow);text-decoration:none;border-bottom:0.5px solid rgba(245,230,163,.3);padding-bottom:3px;margin-bottom:48px;transition:border-color .2s}
+  .contact-email:hover{border-color:var(--yellow)}
+  .contact-sns{display:flex;justify-content:center;gap:16px}
+  .sns-btn{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;border:0.5px solid rgba(255,255,255,.15);border-radius:40px;padding:10px 22px;transition:border-color .2s,color .2s}
+  .sns-btn:hover{border-color:var(--pink);color:var(--pink)}
+  footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,.06);padding:28px 48px;display:flex;align-items:center;justify-content:space-between}
+  .footer-left{display:flex;align-items:center;gap:10px}
+  .footer-word{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:0.1em;color:rgba(255,255,255,.4)}
+  .footer-copy{font-size:11px;color:rgba(255,255,255,.2);letter-spacing:0.04em}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  @media(max-width:768px){
+    nav{padding:16px 24px}
+    .nav-links{display:none}
+    .hero{grid-template-columns:1fr;padding:100px 24px 60px}
+    .hero-right{display:none}
+    .about{grid-template-columns:1fr;padding:80px 24px;gap:40px}
+    .brands{padding:80px 24px}
+    .brands-grid{grid-template-columns:1fr}
+    .values{grid-template-columns:1fr;padding:80px 24px;gap:40px}
+    .contact{padding:80px 24px}
+    footer{padding:24px;flex-direction:column;gap:12px;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="bt-logo">
+      <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 9h8.5c2.5 0 4.5 1.8 4.5 4s-2 4-4.5 4H7V9z" stroke="#1E1A1C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 17h9.5c2.8 0 5 1.9 5 4.2s-2.2 4.2-5 4.2H7V17z" stroke="#1E1A1C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 9h12M26 9v16.5" stroke="#C9506A" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="31" cy="27" r="1.5" fill="#F5E6A3"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">Better Thing</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-left reveal">
+    <div class="hero-eyebrow">Seoul · K-Beauty House</div>
+    <h1 class="hero-title">Making<br><em>beauty</em><br>better.</h1>
+    <p class="hero-desc">Better Thing은 다음 세대의 K-뷰티를 만드는 브랜드 하우스입니다.<br>글로벌 시장을 타겟으로, 감각적인 제품과 브랜드를 디벨롭합니다.</p>
+    <div class="hero-btns">
+      <a href="#brands" class="btn-primary">Our Brands</a>
+      <a href="#about" class="btn-secondary">Learn more</a>
+    </div>
+  </div>
+  <div class="hero-right reveal">
+    <div class="hero-monogram">
+      <div class="mono-ring"></div>
+      <div class="mono-ring-2"></div>
+      <div class="mono-dots">
+        <div class="mono-dot"></div><div class="mono-dot"></div>
+        <div class="mono-dot"></div><div class="mono-dot"></div>
+      </div>
+      <div class="mono-inner"><span class="mono-text">bt</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">K-Beauty</span><span class="marquee-item">Glossy Body</span>
+    <span class="marquee-item">TikTok Shop USA</span><span class="marquee-item">Better Thing Co.</span>
+    <span class="marquee-item">VELA Brand</span><span class="marquee-item">Glow Shot</span>
+    <span class="marquee-item">Seoul · Global</span><span class="marquee-item">K-Beauty</span>
+    <span class="marquee-item">Glossy Body</span><span class="marquee-item">TikTok Shop USA</span>
+    <span class="marquee-item">Better Thing Co.</span><span class="marquee-item">VELA Brand</span>
+    <span class="marquee-item">Glow Shot</span><span class="marquee-item">Seoul · Global</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-img reveal">
+    <div class="about-img-inner">bt</div>
+    <div class="about-img-tag">✦ Seoul-based, Global-minded</div>
+  </div>
+  <div class="about-content reveal">
+    <div class="section-label">About Us</div>
+    <h2 class="section-title">새로운 K-뷰티를<br><em>디자인합니다</em></h2>
+    <p class="section-body">Better Thing Co.는 서울을 기반으로 미주 시장을 타겟하는 K-뷰티 브랜드 하우스입니다. 트렌드에 민감하게 반응하며, 제품 개발부터 브랜딩, 디지털 마케팅까지 인하우스로 운영합니다.<br><br>우리는 단순히 제품을 만드는 것이 아니라, 사람들이 사랑하는 브랜드를 만듭니다.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num">2025</div><div class="stat-label">Founded</div></div>
+      <div class="stat"><div class="stat-num">USA</div><div class="stat-label">Primary Market</div></div>
+      <div class="stat"><div class="stat-num">1st</div><div class="stat-label">Brand · VELA</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="brands" id="brands">
+  <div class="brands-header reveal">
+    <div class="section-label" style="justify-content:center">Our Brands</div>
+    <h2 class="section-title" style="text-align:center">브랜드 포트폴리오</h2>
+  </div>
+  <div class="brands-grid">
+    <div class="brand-card reveal">
+      <div class="brand-card-icon icon-vela">V</div>
+      <div class="brand-card-name">VELA</div>
+      <div class="brand-card-status status-launch">론칭 준비중</div>
+      <p class="brand-card-desc">Y2K 글로시 바디 케어 브랜드. 히어로 제품 GLOW SHOT Body Cream을 앞세워 미주 TikTok Shop 공략.</p>
+    </div>
+    <div class="brand-card reveal">
+      <div class="brand-card-icon icon-bt">bt</div>
+      <div class="brand-card-name">Better Thing</div>
+      <div class="brand-card-status status-dev">디벨롭 중</div>
+      <p class="brand-card-desc">성분 중심의 클린 스킨케어 라인. 내추럴 포뮬라와 감각적인 패키징으로 글로벌 시장 공략 예정.</p>
+    </div>
+    <div class="brand-card reveal">
+      <div class="brand-card-icon icon-next">+</div>
+      <div class="brand-card-name">Next Brand</div>
+      <div class="brand-card-status status-tbd">Coming Soon</div>
+      <p class="brand-card-desc">새로운 카테고리와 타겟을 위한 세 번째 브랜드를 준비 중입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="values" id="values">
+  <div class="values-left reveal">
+    <div class="section-label">Our Values</div>
+    <h2 class="section-title">우리가<br>믿는 <em>것들</em></h2>
+  </div>
+  <div class="values-list">
+    <div class="value-item reveal">
+      <div class="value-num">01</div>
+      <div><div class="value-name">Trend-First</div><p class="value-desc">트렌드를 따라가는 것이 아니라, 트렌드가 되는 제품을 만듭니다. TikTok, Instagram 등 디지털 플랫폼에서 바이럴되는 제품 설계를 최우선으로 합니다.</p></div>
+    </div>
+    <div class="value-item reveal">
+      <div class="value-num">02</div>
+      <div><div class="value-name">Better Ingredients</div><p class="value-desc">좋은 원료, 좋은 제형. 성분에 타협하지 않으면서도 감각적인 텍스쳐와 향을 구현합니다. K-뷰티 포뮬라의 정수를 글로벌 소비자에게 전달합니다.</p></div>
+    </div>
+    <div class="value-item reveal">
+      <div class="value-num">03</div>
+      <div><div class="value-name">Brand as Product</div><p class="value-desc">패키징, 네이밍, 스토리텔링까지 — 브랜드 자체가 제품입니다. 소비자가 사고 싶어지는 브랜드 경험을 디자인합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-blob contact-blob-1"></div>
+  <div class="contact-blob contact-blob-2"></div>
+  <div class="contact-inner reveal">
+    <div class="contact-label">Contact</div>
+    <h2 class="contact-title">함께<br><em>만들어봐요</em></h2>
+    <p class="contact-sub">협업 문의, 파트너십, 바이어 미팅 등<br>어떤 이야기든 환영합니다.</p>
+    <a href="mailto:hello@betterthing.co.kr" class="contact-email">hello@betterthing.co.kr</a>
+    <div class="contact-sns">
+      <a href="#" class="sns-btn">Instagram</a>
+      <a href="#" class="sns-btn">TikTok</a>
+      <a href="#" class="sns-btn">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <div class="bt-logo" style="width:24px;height:24px;opacity:.4">
+      <svg viewBox="0 0 38 38" fill="none"><path d="M7 9h8.5c2.5 0 4.5 1.8 4.5 4s-2 4-4.5 4H7V9z" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h9.5c2.8 0 5 1.9 5 4.2s-2.2 4.2-5 4.2H7V17z" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 9h12M26 9v16.5" stroke="rgba(255,255,255,.5)" stroke-width="1.4" stroke-linecap="round"/></svg>
+    </div>
+    <span class="footer-word">Better Thing Co.</span>
+  </div>
+  <span class="footer-copy">© 2025 Better Thing Co. All rights reserved.</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) el.classList.add('visible');
+    else io.observe(el);
+  });
+</script>
+</body>
+</html>
